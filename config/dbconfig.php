@@ -51,4 +51,11 @@ class DBconnection
     $this->allrows = $this->rows->fetchAll(PDO::FETCH_ASSOC);
     return $this->allrows;
   }
+
+  public function update($query,$arr){
+    $this->rows = $this->conn->prepare($query);
+    $this->rows->execute($arr);
+    $this->allrows = $this->rows->fetchAll(PDO::FETCH_ASSOC);
+    return $this->allrows;
+  }
 }
