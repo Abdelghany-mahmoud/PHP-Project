@@ -24,16 +24,30 @@ class DBconnection
     }
   }
 
-  public function select($query){
+  public function selectAll($query){
     $this->rows = $this->conn->prepare($query);
     $this->rows->execute();
     $this->allrows = $this->rows->fetchAll(PDO::FETCH_ASSOC);
     return $this->allrows;
   }
 
+  public function select($query,$param){
+    $this->rows = $this->conn->prepare($query);
+    $this->rows->execute($param);
+    $this->allrows = $this->rows->fetchAll(PDO::FETCH_ASSOC);
+    return $this->allrows;
+  }
+
   public function insert($query,$arr){
     $this->rows = $this->conn->prepare($query);
-    $this->rows->execute();
+    $this->rows->execute($arr);
+    $this->allrows = $this->rows->fetchAll(PDO::FETCH_ASSOC);
+    return $this->allrows;
+  }
+
+  public function delete($query,$arr){
+    $this->rows = $this->conn->prepare($query);
+    $this->rows->execute($arr);
     $this->allrows = $this->rows->fetchAll(PDO::FETCH_ASSOC);
     return $this->allrows;
   }

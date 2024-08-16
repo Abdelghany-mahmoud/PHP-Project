@@ -4,28 +4,40 @@
   $ob = new DBconnection();
   var_dump($_POST);
 
-  foreach ($_POST as $k => $v){
-    echo $k.' => '.$v;
-    echo '</br>';
-  }
-  
+  $queryD='DELETE FROM  TABLE ?';
+  $a1= ['order_items'];
+  $a2= ['orders'];
+  // $ob->delete($queryD,$a1);
+  // $ob->delete($queryD,$a2);
 
   $query  = 'select * from users';
   $query2 = 'select * from orders';
   $query3 = 'select * from order_items';
   $query4 = 'select * from products';
-  // var_dump($ob->select($query));
-  // var_dump($ob->select($query2));
-  // var_dump($ob->select($query3));
-  // var_dump($ob->select($query4));
+  var_dump($ob->selectAll($query));
+  var_dump($ob->selectAll($query2));
+  var_dump($ob->selectAll($query3));
+  var_dump($ob->selectAll($query4));
+
+  // $queryi = 'insert into orders (user_id) values(?)';
+  $Uid=[1];
+  // $ob->insert($queryi,$Uid);
+  $LOI_query= 'SELECT id FROM orders ORDER BY ID DESC LIMIT 1'; //LOI 'last order id'
+  $LOI = $ob->selectAll($LOI_query)[0]['id'];
 
 
-  $queryi = 'insert into orders (user_id) values(1)';
-  $products = array("1"=>"2","2"=>"1");
-  $queryi2 = 'insert into order_items (order_id,quantity) values (1,2)';
-  // $ob->insert($query2,$products);
-
-  
+  // foreach ($_POST as $k => $v) {
+  //   echo $k.' = '.$v;
+  //   $Item_Price_query = 'select price from products where id =?';
+  //   $K=[$k];
+  //   $Item_Price = $ob->select($Item_Price_query, $K)[0]['price'];
+  //   echo '</br>'.$Item_Price.'</br>';
+  //   $priceTotal = $Item_Price * $v;
+  //   $queryi2='INSERT INTO order_items values(?,?,?,?)';
+  //   $arr=[$LOI, $k, $v, $priceTotal];
+  //   $ob->insert($queryi2,$arr);
+  // }
+  // var_dump($ob->selectAll($query3));
   ?>
 
 
