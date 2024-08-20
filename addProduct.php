@@ -38,7 +38,7 @@ ini_set('display_errors', '1');
           </div>';
       } else {
         $ext = explode('/', $_FILES['image']['type'])[1];
-        $image = $_POST['name'] . "." . $ext;
+        $image =$_POST['name'].".".$ext;
         $file_path = "imgs/" . $image;
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $file_path)) {
           echo "Sorry, there was an error uploading your image.";
