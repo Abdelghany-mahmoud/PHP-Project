@@ -34,7 +34,7 @@ ini_set('display_errors', '1');
         || empty($_FILES['image']['name'])
       ) {
         echo '<div class="alert alert-danger col-3 m-3" role="alert">
-            <h5 style="display:inline;">Pleasse Fill All Fields!</h5>
+            <h5 style="display:inline;">Please Fill All Fields!</h5>
           </div>';
       } else {
         $ext = explode('/', $_FILES['image']['type'])[1];
