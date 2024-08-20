@@ -4,7 +4,7 @@ class DBconnection
   private $servername = "localhost";
   private $username = "abdo";
   private $password = "123";
-  private $database = "cafeteria";
+  private $database = "newcafeteria";
   private $conn;
   private $rows;
   private $allrows;
@@ -25,7 +25,7 @@ class DBconnection
   }
 
   public function selectAll($query){
-    $this->rows = $this->conn->query($query);
+    $this->rows = $this->conn->prepare($query);
     $this->rows->execute();
     $this->allrows = $this->rows->fetchAll(PDO::FETCH_ASSOC);
     return $this->allrows;

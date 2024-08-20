@@ -12,9 +12,17 @@ class Product
 
   private $conn;
 
+  public function __construct($name,$price,$category,$image){
+    $this->name=$name;
+    $this->price=$price;
+    $this->category=$category;
+    $this->image=$image;
+  }
 
-  public function add_user()
+  public function addProduct()
   {
-
+    $this->conn = new DBconnection();
+    $query='INSERT INTO products (name,price,category,image) values (?,?,?,?)';
+    $this->conn->DML($query,[$this->name,$this->price,$this->category,$this->image]);
   }
 }

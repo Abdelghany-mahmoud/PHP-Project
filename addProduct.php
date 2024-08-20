@@ -1,8 +1,8 @@
 <?php require 'config/dbconfig.php'; ?>
+<?php require 'product.php'; ?>
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-$ob = new DBconnection();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,9 +34,21 @@ $ob = new DBconnection();
         || empty($_FILES['image']['name'])
       ) {
         echo '<div class="alert alert-danger col-3 m-3" role="alert">
-            Pleasse Fill All Fields!
+            <h5 style="display:inline;">Pleasse Fill All Fields!</h5>
           </div>';
       } else {
+        $ext = explode('/', $_FILES['image']['type'])[1];
+        $image = $_POST['name'] . "." . $ext;
+        $file_path = "imgs/" . $image;
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $file_path)) {
+          echo "Sorry, there was an error uploading your image.";
+        }
+
+        $newproduct = new Product($_POST['name'], $_POST['price'], $_POST['category'], $image);
+        $newproduct->addProduct();
+        echo '<div class="alert alert-success" role="alert">
+                  <h5 style="display:inline;">Product added successfuly :)</h5>
+                </div>';
       }
     }
     ?>
@@ -61,6 +73,9 @@ $ob = new DBconnection();
         <input type="submit" value="Submit">
       </fieldset>
     </form>
+
+
+
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
