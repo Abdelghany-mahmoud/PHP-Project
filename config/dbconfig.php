@@ -5,9 +5,9 @@ class DBconnection
   private $username = "abdo";
   private $password = "123";
   private $database = "cafeteria";
-  public $conn;
-  public $rows;
-  public $allrows;
+  private $conn;
+  private $rows;
+  private $allrows;
 
   public function __construct()
   {

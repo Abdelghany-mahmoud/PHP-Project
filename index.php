@@ -1,4 +1,5 @@
-  <?php require 'config/dbconfig.php';
+  <?php require 'config/dbconfig.php'; ?>
+  <?php
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
   $ob = new DBconnection();
@@ -16,7 +17,7 @@
   $Uid = [1];
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     $queryi = 'insert into orders (user_id) values(?)';
     $ob->DML($queryi, $Uid);
     $LOI_query = 'SELECT id FROM orders ORDER BY ID DESC LIMIT 1'; //LOI 'last order id'
